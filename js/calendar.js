@@ -162,7 +162,12 @@ class Calendar {
       this.startDate = target;
       this.endDate = null;
     } else {
-      this.endDate = target;
+      if(tmpDate < new Date(this.startDate.dataset.date)) {
+        this.endDate = this.startDate;
+        this.startDate = target;
+      } else {
+        this.endDate = target;
+      }
     }
     this.createSelectDateClass();
     this.handlePeriod();
