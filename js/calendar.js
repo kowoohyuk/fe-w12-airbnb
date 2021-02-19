@@ -59,8 +59,12 @@ class Calendar {
       this.target.innerHTML += calendarWrap;
     }
     this.renderCalendarArrow();
-    this.startDate = this.target.querySelector('.start-date');
-    this.endDate = this.target.querySelector('.end-date');
+    if(this.target.querySelector('.start-date')) {
+      this.startDate = this.target.querySelector('.start-date');
+    }
+    if(this.target.querySelector('.end-date')) {
+      this.endDate = this.target.querySelector('.end-date');
+    }
     this.handlePeriod();
   }
 
@@ -97,7 +101,7 @@ class Calendar {
       }
       const blockDate = new Date(year + '-' + month + '-' + v);
       const blockClass = [];
-      blockClass.push(nowDate.getDate() > v || v === '' ? 'previous-days' : 'able');
+      blockClass.push(nowDate > blockDate || v === '' ? 'previous-days' : 'able');
       blockClass.push(blockDate == tmpStart ? 'start-date' : blockDate == tmpEnd ? 'end-date' : '');
       return acc += `${prefix} <div class="${blockClass.join(' ')}" data-date="${blockDate}">${v}</div> ${suffix}`
     }, '<div class="js-calendar__body">') + '</div>';
