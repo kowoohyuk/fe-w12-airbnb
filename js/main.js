@@ -7,6 +7,7 @@ const endDate = document.querySelectorAll('.js-end-date');
 const anchorTab = document.querySelector('.anchor-tab');
 const toggleItems = document.querySelectorAll('.js-toggle');
 const searchItems = document.querySelectorAll('.search-item');
+const navList = document.querySelector('.nav__list');
 
 const init = () => {
   const observer = new IntersectionObserver( 
@@ -16,12 +17,25 @@ const init = () => {
   observer.observe(header);
 
   window.addEventListener('click', ({ target }) => windowClickEvent(target));
-  anchorTab.addEventListener('click', ({ target }) => toggleCategory(target));
-  toggleItems.forEach((v, i) => v.addEventListener('click', ({ target }) => toggleItem(target)));
+  anchorTab.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleCategory(e.target);
+  });
+  toggleItems.forEach((v, i) => v.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleItem(e.target);
+  }));
   calendarTarget.forEach((v, i) => new Calendar(v, new Date(), startDate[i], endDate[i]).init());
-
+  navList.addEventListener('click', e => {
+    e.stopPropagation();
+  });
   const windowClickEvent = target => {
-    // modal 외의 영역 클릭 시 히든처리
+    for(let i = 0; i < modalItems.length; i++) {
+      if(!modalItems[i].classList.contains('hidden')) {
+        modalItems[i].classList.add('hidden');
+        break;
+      }
+    }
   }
 
   const toggleItem = target => {
@@ -44,7 +58,7 @@ const init = () => {
     searchItems.forEach(v => v.classList.add('hidden'));
     anchorTab.querySelectorAll('.anchor-tab__anchor').forEach(v => v.classList.remove('active'));
     target.classList.add('active');
-    searchItems[target.dataset.target_idx].classList.remove('hidden');
+    if(target.dataset.target_idx) searchItems[target.dataset.target_idx].classList.remove('hidden');
   };
 }
 

@@ -30,7 +30,10 @@ class Calendar {
   init() {
     if(!this.target) return;
     this.render();
-    this.target.addEventListener('click', ({ target }) => this.handleSelect(target));
+    this.target.addEventListener('click', e => {
+      e.stopPropagation();
+      this.handleSelect(e.target);
+    });
   }
 
   render() {
@@ -118,9 +121,15 @@ class Calendar {
     if(prevDate < new Date()) {
       leftArrow.classList.add('not-used');
     } else {
-      leftArrow.addEventListener('click', () => this.handleMonth(-1));
+      leftArrow.addEventListener('click', e => {
+        e.stopPropagation();
+        this.handleMonth(-1);
+      });
     }
-    rightArrow.addEventListener('click', () => this.handleMonth(1));
+    rightArrow.addEventListener('click', e => {
+      e.stopPropagation();
+      this.handleMonth(1);
+    });
   }
 
   handleMonth(number) {
