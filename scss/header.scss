@@ -52,6 +52,17 @@ header {
           visibility: visible;
         }
       }
+      &.active {
+        cursor: default;
+        &::after {
+          width: 15px;
+          left: calc(50% - 7.5px);
+          visibility: visible;
+        }
+        &:hover {
+          opacity: 1;
+        }
+      }
     }
   }
   nav {
@@ -131,9 +142,9 @@ header {
     grid-template-columns: repeat(4, 1fr);
     background: #fff;
     border-radius: 50px;
-    // overflow: hidden;
-  }
-  .search-item {
+    &.type-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
     &-tag {
       background: #fff;
       cursor: pointer;

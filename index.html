@@ -21,8 +21,8 @@
       <div class="col-6">
         <div class="col-3"></div>
         <div class="col-6 anchor-tab">
-          <a class="anchor-tab__anchor" data-index="0">숙소</a>
-          <a class="anchor-tab__anchor" data-index="1">체험</a>
+          <a class="anchor-tab__anchor active" data-target_idx="0">숙소</a>
+          <a class="anchor-tab__anchor" data-target_idx="1">체험</a>
           <a class="anchor-tab__anchor">온라인 체험</a>
           <button class="input-button-sticky__toggle">
             <span>검색 시작하기</span>
@@ -84,25 +84,27 @@
           <div class="search-item__modal js-calendar modal hidden" data-target_name="calendar-0">
           </div>
         </div>
-
-        <!-- <div class="col-12 search-item hidden">
-          <div class="input-item js-toggle-place">
-            <span class="input-item__label">위치</span>
-            <input class="input-item__text" type="text" placeholder="어디로 여행가세요?">
+        <div class="col-12 search-item type-2 hidden">
+          <div class="search-item-tag js-toggle" data-target="place-1">
+            <span class="search-item-tag__label">위치</span>
+            <input class="search-item-tag__text" type="text" placeholder="어디로 여행가세요?">
           </div>
-          <div class="input-item js-toggle-calendar">
-            <span class="input-item__label">날짜</span>
-            <input class="input-item__text" type="text" placeholder="원하는 날짜를 입력하세요." class="startDate endDate" disabled>
+          <div class="search-item-tag js-toggle" data-target="calendar-1">
+            <span class="search-item-tag__label">날짜</span>
+            <input class="search-item-tag__text js-start-date js-end-date" type="text" placeholder="원하는 날짜를 입력하세요" disabled>
+            <button class="search-item-tag__button">
+              🔍
+            </button>
           </div>
-          <div class="input-item__modal hidden search-place">
+          <div class="search-item__modal search-place modal hidden" data-target_name="place-1">
             <div class="search-place__item">
               <img src="images/search-01.jpg" alt="가까운 여행지 둘러보기 이미지" title="Nearby place">
               <p>가까운 여행지 둘러보기</p>
             </div>
           </div>
-          <div class="input-item__modal js-calendar hidden">
+          <div class="search-item__modal js-calendar modal hidden" data-target_name="calendar-1">
           </div>
-        </div> -->
+        </div>
       </div>
       <div class="col-2"></div>
     </div>

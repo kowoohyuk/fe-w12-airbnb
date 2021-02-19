@@ -56,8 +56,8 @@ class Calendar {
       this.target.innerHTML += calendarWrap;
     }
     this.renderCalendarArrow();
-    this.startDate = document.querySelector('.start-date');
-    this.endDate = document.querySelector('.end-date');
+    this.startDate = this.target.querySelector('.start-date');
+    this.endDate = this.target.querySelector('.end-date');
     this.handlePeriod();
   }
 
@@ -177,12 +177,17 @@ class Calendar {
     if(this.startDate){
       const targetDate = new Date(this.startDate.dataset.date);
       this.startDate.classList.add('start-date');
+      this.endDateTarget.value = '';
       this.startDateTarget.value = `${targetDate.getMonth() + 1}월 ${targetDate.getDate()}일`;
     }
     if(this.endDate) {
       const targetDate = new Date(this.endDate.dataset.date);
       this.endDate.classList.add('end-date');
-      this.endDateTarget.value = `${targetDate.getMonth() + 1}월 ${targetDate.getDate()}일`;
+      if(this.startDateTarget == this.endDateTarget) {
+        this.endDateTarget.value += ` ~ ${targetDate.getMonth() + 1}월 ${targetDate.getDate()}일`;
+      } else {
+        this.endDateTarget.value = `${targetDate.getMonth() + 1}월 ${targetDate.getDate()}일`;
+      }
     }
   }
 
@@ -207,7 +212,7 @@ class Calendar {
     if(!this.startDate || !this.endDate) return;
     const startDate = new Date(this.startDate.dataset.date);
     const endDate   = new Date(this.endDate.dataset.date);
-    const target    = document.querySelectorAll('.js-calendar__line div:not(.previous-days)');
+    const target    = this.target.querySelectorAll('.js-calendar__line div:not(.previous-days)');
     target.forEach(v => {
       const tmpDate = new Date(v.dataset.date);
       if(tmpDate < startDate || tmpDate > endDate) {
@@ -220,7 +225,7 @@ class Calendar {
 
   removePeriodClass() {
     if(!this.target) return;
-    const target = document.querySelectorAll('.js-calendar__line div:not(.previous-days)');
+    const target = this.target.querySelectorAll('.js-calendar__line div:not(.previous-days)');
     target.forEach(v => {
       v.classList.remove('period');
     });

@@ -6,6 +6,7 @@ const startDate = document.querySelectorAll('.js-start-date');
 const endDate = document.querySelectorAll('.js-end-date');
 const anchorTab = document.querySelector('.anchor-tab');
 const toggleItems = document.querySelectorAll('.js-toggle');
+const searchItems = document.querySelectorAll('.search-item');
 
 const init = () => {
   const observer = new IntersectionObserver( 
@@ -39,8 +40,11 @@ const init = () => {
   }
 
   const toggleCategory = target => {
-    if(!target.classList.contains('category__anchor')) return;
-    console.log(target.dataset.index);
+    if(!target.classList.contains('anchor-tab__anchor')) return;
+    searchItems.forEach(v => v.classList.add('hidden'));
+    anchorTab.querySelectorAll('.anchor-tab__anchor').forEach(v => v.classList.remove('active'));
+    target.classList.add('active');
+    searchItems[target.dataset.target_idx].classList.remove('hidden');
   };
 }
 
